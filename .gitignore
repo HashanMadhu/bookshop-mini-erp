@@ -1,0 +1,27 @@
+# Environment configuration (Contains sensitive DB passwords)
+.env
+.env.local
+.env.*.local
+
+# Composer packages (Heavy dependency folder)
+/vendor/
+
+# CodeIgniter writable files (Logs, cache, debug session data)
+/writable/debugbar/
+/writable/cache/*
+/writable/logs/*
+/writable/session/*
+/writable/uploads/*
+!/writable/cache/index.html
+!/writable/logs/index.html
+!/writable/session/index.html
+!/writable/uploads/index.html
+
+# IDE configuration files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
