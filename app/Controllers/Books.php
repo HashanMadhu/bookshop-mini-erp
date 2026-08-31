@@ -10,10 +10,12 @@ class Books extends BaseController
     {
         $model = new BookModel();
 
-        // Fetch all books from the database
-        $data['books'] = $model->findAll();
+        $data = [
+          'title' => 'Book Management',
+          'active_menu' => 'books',
+          'books' => $model->findAll(),
+        ];
 
-        // Send data to the view page
         return view('books/index', $data);
     }
 
