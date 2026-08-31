@@ -3,17 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Bookshop - Books List</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 40px; background-color: #f4f4f9; }
-        h2 { color: #333; }
-        table { width: 100%; border-collapse: collapse; background: #fff; margin-top: 20px; }
-        th, td { padding: 12px; border: 1px solid #ddd; text-align: left; }
-        th { background-color: #007bff; color: white; }
-    </style>
+    <link rel="stylesheet" href="<?= base_url('css/style.css'); ?>">
 </head>
 <body>
     <h2>Book List</h2>
-    <a href="<?= base_url('books/create'); ?>" style="display: inline-block; margin-bottom: 15px; padding: 10px 15px; background-color: #28a745; color: white; text-decoration: none; border-radius: 4px;">+ Add New Book</a>
+    <a href="<?= base_url('books/create'); ?>" class="btn-add">+ Add New Book</a>
+    
     <table>
         <tr>
             <th>ID</th>
@@ -21,6 +16,7 @@
             <th>Author</th>
             <th>Price</th>
             <th>Stock</th>
+            <th>Actions</th>
         </tr>
         <?php if (!empty($books) && is_array($books)): ?>
             <?php foreach ($books as $book): ?>
@@ -30,11 +26,15 @@
                     <td><?= esc($book['author']); ?></td>
                     <td><?= esc($book['price']); ?></td>
                     <td><?= esc($book['stock']); ?></td>
+                    <td>
+                        <a href="<?= base_url('books/edit/' . $book['id']); ?>" class="btn-edit">Edit</a>
+                        <a href="<?= base_url('books/delete/' . $book['id']); ?>" class="btn-delete" onclick="return confirm('Are you sure you want to delete this book?');">Delete</a>
+                    </td>
                 </tr>
             <?php endforeach; ?>
         <?php else: ?>
             <tr>
-                <td colspan="5">No books found in database.</td>
+                <td colspan="6">No books found in database.</td>
             </tr>
         <?php endif; ?>
     </table>
