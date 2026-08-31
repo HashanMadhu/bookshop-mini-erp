@@ -31,6 +31,12 @@
                         </a>
                     </li>
                     <li>
+                        <a href="<?= base_url('categories'); ?>"
+                            class="<?= ($active_menu ?? '') === 'categories' ? 'active' : ''; ?>">
+                            <span>🏷️</span> Categories
+                        </a>
+                    </li>
+                    <li>
                         <a href="<?= base_url('pos'); ?>"
                             class="<?= ($active_menu ?? '') === 'pos' ? 'active' : ''; ?>">
                             <span>🛒</span> Sales / POS
