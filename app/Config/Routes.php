@@ -20,3 +20,8 @@ $routes->get('pos', 'Dashboard::index');
 $routes->get('hr', 'Dashboard::index');
 $routes->get('accounting', 'Dashboard::index');
 $routes->get('settings', 'Dashboard::index');
+
+$routes->get('categories', 'Categories::index');
+$routes->get('categories/create', 'Categories::create');
+$routes->post('categories/store', 'Categories::store');
+$routes->get('categories/delete/(:num)', 'Categories::delete/$1');

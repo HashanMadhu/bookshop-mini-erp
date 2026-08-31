@@ -3,69 +3,86 @@
 namespace App\Controllers;
 
 use App\Models\BookModel;
+use App\Models\CategoryModel;
 
 class Books extends BaseController
 {
-    public function index()
-    {
-        $model = new BookModel();
+  public function index()
+  {
+    $bookModel = new BookModel();
 
-        $data = [
-          'title' => 'Book Management',
-          'active_menu' => 'books',
-          'books' => $model->findAll(),
-        ];
+    $data = [
+      'title' => 'Book Management',
+      'active_menu' => 'books',
+      'books' => $bookModel->getBooksWithCategory(),
+    ];
 
-        return view('books/index', $data);
-    }
+    return view('books/index', $data);
+  }
 
-    public function create()
-    {
-        return view('books/Create_book');
-    }
+  public function create()
+  {
+    $categoryModel = new CategoryModel();
 
-    public function store()
-    {
-      $model = new BookModel();
-      
-      $model->save([
-        'title' => $this->request->getpost('title'),
-        'author'=> $this->request->getpost('author'),
-        'price'=> $this->request->getpost('price'),
-        'stock'=> $this->request->getpost('stock'),
-      ]);
+    $data = [
+      'title' => 'Add New Book',
+      'active_menu' => 'books',
+      'categories' => $categoryModel->findAll(),
+    ];
+    return view('books/create_book', $data);
+  }
 
-      return redirect()->to(base_url('books'));
-    }
+  public function store()
+  {
+    $bookModel = new BookModel();
 
-    public function edit($id=null)
-    {
-      $model = new BookModel();
-      $data['book'] = $model->find($id);
+    $bookModel->save([
+      'title' => $this->request->getpost('title'),
+      'author' => $this->request->getpost('author'),
+      'category_id' => $this->request->getpost('category_id'),
+      'price' => $this->request->getpost('price'),
+      'stock' => $this->request->getpost('stock'),
+    ]);
 
-      return view('books/edit_book', $data);
-    }
+    return redirect()->to(base_url('books'));
+  }
 
-    public function update($id=null)
-    {
-      $model = new BookModel();
+  public function edit($id = null)
+  {
+    $bookModel = new BookModel();
+    $categoryModel = new CategoryModel();
 
-      $model->update($id, [
-        'title' => $this->request->getpost('title'),
-        'author'=> $this->request->getpost('author'),
-        'price'=> $this->request->getpost('price'),
-        'stock'=> $this->request->getpost('stock'),
-      ]);
+    $data = [
+      'title' => 'Edit Book',
+      'active_menu' => 'books',
+      'book' => $bookModel->find($id),
+      'categories' => $categoryModel->findAll(),
+    ];
 
-      return redirect()->to(base_url('books'));
-    }
+    return view('books/edit_book', $data);
+  }
 
-    public function delete($id=null)
-    {
-      $model = new BookModel();
-      $model->delete($id);
+  public function update($id = null)
+  {
+    $bookModel = new BookModel();
 
-      return redirect()->to(base_url('books'));
-    }
+    $bookModel->update($id, [
+      'title' => $this->request->getPost('title'),
+      'author' => $this->request->getPost('author'),
+      'category_id' => $this->request->getPost('category_id'),
+      'price' => $this->request->getPost('price'),
+      'stock' => $this->request->getPost('stock'),
+    ]);
+
+    return redirect()->to(base_url('books'));
+  }
+
+  public function delete($id = null)
+  {
+    $model = new BookModel();
+    $model->delete($id);
+
+    return redirect()->to(base_url('books'));
+  }
 
 }
