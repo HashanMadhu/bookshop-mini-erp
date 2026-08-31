@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Bookshop - Books List</title>
-    <link rel="stylesheet" href="<?= base_url('css/style.css'); ?>">
-</head>
-<body>
+<?= $this->extend('layouts/main'); ?>
+
+<?= $this->section('content'); ?>
     <h2>Book List</h2>
     <a href="<?= base_url('books/create'); ?>" class="btn-add">+ Add New Book</a>
     
@@ -38,5 +33,4 @@
             </tr>
         <?php endif; ?>
     </table>
-</body>
-</html>
+<?= $this->endSection(); ?>
